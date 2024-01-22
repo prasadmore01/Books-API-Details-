@@ -1,5 +1,6 @@
 let showBtn = document.getElementById("showBtn")
 showBtn.addEventListener("click",showBooks)
+let booksArr = []
 
 function showBooks(){
 
@@ -9,14 +10,20 @@ function showBooks(){
 
     books.send()
 
-    books.onload()=function(){
+    books.onload =function(){
         if(books.status===200){
         let response = (this.responseText)
-        console.log(response)
+        let res = JSON.parse(response)
+        
+        for(let i=0;i<50;i++){
+            booksArr.push(res[i])
+        }
     
         }
 
     }
+
+    console.log(booksArr)
 
 
 }
