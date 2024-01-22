@@ -8,12 +8,12 @@ function showBooks(){
     let books = new XMLHttpRequest();
 
 
-    books.open("get",'books.json',true)
+    books.open("GET",'books.json',true)
 
     books.send()
 
-    books.onload =function(){
-        if(books.status===200){
+    books.onreadystatechange =function(){
+        if(books.readyState==4 && books.status===200){
         let response = (this.responseText)
         let res = JSON.parse(response)
         
@@ -26,7 +26,7 @@ function showBooks(){
     }
 
     display()
-    // console.log(booksArr)
+
 
 
 }

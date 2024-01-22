@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <style>
+            img{
+                width:100px;
+                height:100px;
+                border:2px solid green;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="https://dummyjson.com/products&quot; method="get">
+            <input type="submit" value="All Products" >
+        </form>
+        <input type="submit" value="Ajax Req" onclick="funClick()">
+        <table border="2">
+            <tr>
+                <td>Id</td>
+                <td>Title</td>
+                <td>Price</td>
+                <td>Image</td>
+            </tr>
+        </table>
+        <script>
+            var tbl1=document.querySelector("table");
+        function funClick(){
+            var arr=[];
+            var obj=new XMLHttpRequest();
+            obj.open("get","https://dummyjson.com/products");
+            obj.send();
+            obj.onreadystatechange=function(){
+                if(obj.readyState==4 && obj.status==200){
+                    var response=obj.responseText;
+                    res=JSON.parse(response);
+                    arr=res.products;
+                    console.log(arr[0]);
+                    display(arr);
+                }
+            }
+
+        }
+        function display(arr){
+            var str="";
+            for(i=0;i<arr.length;i++){
+                str+="<tr><td>"+arr[i].id+"</td><td>"+arr[i].title+"</td><td>"+arr[i].price+"</td><td><img src="+arr[i].thumbnail+"></td></tr>";
+            }
+            tbl1.innerHTML+=str;
+        }
+    </script>
+    </body>
+</html>
